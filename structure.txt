@@ -1,0 +1,14 @@
+get string as ("%i, %v, %s")
+            ||
+            \/
+searches for the values that equals to % sign
+            ||
+            \/
+Runs correct function to convert and print the value
+            ||
+            \/
+outputs values one buy one going through the string
+
+
+somehow check if the variable given as the second arg has the same type as the format given in the string
+
