@@ -1,6 +1,58 @@
+#include <stdio.h>
 #include "ft_printf.h"
 
-int main(){
-    ft_printf("Hello %s, your score is %d%% and your hex ID is %x.\n", "Alice", (void *)95, (void *)255);
+int main(void)
+{
+    // char str[] = "World!";
+    // char *nulls = NULL;
+    // int r1, r2;
+
+    // r1 = ft_printf("1) simple: Hello World\n");
+    // r2 = printf("1) simple: Hello World\n");
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("2) string: %s\n", str);
+    // r2 = printf("2) string: %s\n", str);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("3) null string: %s\n", nulls);
+    // r2 = printf("3) null string: %s\n", nulls);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("4) char: %c\n", 'A');
+    // r2 = printf("4) char: %c\n", 'A');
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("5) int/neg: %d %i\n", 42, -7);
+    // r2 = printf("5) int/neg: %d %i\n", 42, -7);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("6) unsigned: %u\n", 3000000000u);
+    // r2 = printf("6) unsigned: %u\n", 3000000000u);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("7) hex: %x %X\n", 3735928559u, 3735928559u);
+    // r2 = printf("7) hex: %x %X\n", 3735928559u, 3735928559u);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("8) pointer: %p\n", (void *)str);
+    // r2 = printf("8) pointer: %p\n", (void *)str);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("9) percent: %%\n");
+    // r2 = printf("9) percent: %%\n");
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // r1 = ft_printf("10) mixed: %s %d %c %u %x %%\n", "mix", 7, 'Z', 42u, 255u);
+    // r2 = printf("10) mixed: %s %d %c %u %x %%\n", "mix", 7, 'Z', 42u, 255u);
+    // printf("   ft=%d  std=%d\n\n", r1, r2);
+
+    // /* trailing percent: test ft_printf handling (printing/reading behavior may differ) */
+    // r1 = ft_printf("11) trailing percent: %");
+    // printf("\n   ft returned %d (trailing percent)\n", r1);
+
+    ft_printf("Negative unsigned: %i \n", -2);
+    printf("Negative unsigned: %i\n", -1);
+
     return 0;
 }
