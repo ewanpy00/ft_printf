@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 15:42:11 by ipykhtin          #+#    #+#             */
+/*   Updated: 2025/11/26 15:48:42 by ipykhtin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <unistd.h>
 
-// ...existing code...
 void printf_value(char format, va_list *args, t_count *count)
 {
     if (format == 'd' || format == 'i')
@@ -20,14 +31,13 @@ void printf_value(char format, va_list *args, t_count *count)
     else if (format == 'X')
         ft_printf_hex_upper(va_arg(*args, unsigned int), count);
 }
-// ...existing code...
 
 static int handle_percent(const char *format, size_t *i, va_list *args, t_count *count)
 {
-    int check_d;
+    ssize_t check_d;
     (*i)++;
     if (format[*i] == '\0')
-        return 1; /* stop: trailing '%' */
+        return 1; 
     if (format[*i] == '%')
     {
         check_d = write(1, "%", 1);
@@ -43,10 +53,9 @@ static int handle_percent(const char *format, size_t *i, va_list *args, t_count 
     return 0;
 }
 
-// ...existing code...
 static int process_next(const char *format, size_t *i, va_list *args, t_count *count)
 {
-    int check_d;
+    ssize_t check_d;
     if (format[*i] == '%')
     {
         if (handle_percent(format, i, args, count))
@@ -67,7 +76,6 @@ static int process_next(const char *format, size_t *i, va_list *args, t_count *c
         return 1;
     return 0;
 }
-// ...existing code...
 
 int ft_printf(const char *format, ...)
 {

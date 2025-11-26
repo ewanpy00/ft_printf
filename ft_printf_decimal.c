@@ -6,7 +6,7 @@
 /*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:14:11 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/26 15:25:37 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:48:11 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void ft_printf_decimal(int num, t_count *count)
 {
-	int check_d;
+	ssize_t check_d;
 
 	if (count->error)
 		return;
