@@ -6,20 +6,33 @@
 /*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:30:09 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/25 15:43:48 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:04:14 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_printf_ptr(void *type, int *size){
+void ft_putptr(unsigned long num, t_count *count){
+    char c;
+    if(num >= 16){
+        ft_putptr(num / 16, count);
+    }
+    c = "0123456789abcdef"[num % 16];
+    ft_putchar(c, count);
+}
+
+void ft_printf_ptr(void *type, t_count *count){
+    int check_d;
     unsigned long ptr = (unsigned long)(type);
-    write(1, "0x", 2);
-    *size += 2;
-    if(ptr == 0){
-        write(1, "0", 1);
-        (*size)++;
+    check_d = write(1, "0x", 2);
+    if(check_d == -1){
+        count->error = 1;
         return;
     }
-    ft_putnbr_hex_lower(ptr, &*size);
+    count->size += 2;
+    if(ptr == 0){
+        ft_putchar('0', count);
+        return;
+    }
+    ft_putptr(ptr, count);
 }

@@ -1,76 +1,65 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/09 13:50:00 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/25 17:56:54 by ipykhtin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_printf.h"
-#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
 
-int printf_value(char format, void *type, int *size){
-    switch (format)
-    {
-    case 'd':
-        ft_printf_decimal(type, &*size);
-        break;
-    case 's':
-        ft_printf_str(type, &*size);
-        break;
-    case 'c':
-        ft_printf_char(type, &*size);
-        break;
-    case 'p':
-        ft_printf_ptr(type, &*size);
-        break;
-    case 'i':
-        ft_printf_int(type, &*size);
-        break;
-    case 'u':
-        ft_printf_unsigned(type, &*size);
-        break;
-    case 'x':
-        ft_printf_hex_lower(type, &*size);
-        break;
-    case 'X':
-        ft_printf_hex_upper(type, &*size);
-        break;
-    default:
-        break;
-    }
-    return 0;
+void printf_value(char format, va_list *args, t_count *count)
+{
+    if (format == 'd' || format == 'i')
+        ft_printf_decimal(va_arg(*args, int), count);
+    else if (format == 's')
+        ft_printf_str(va_arg(*args, char *), count);
+    else if (format == 'c')
+        ft_printf_char(va_arg(*args, int), count);
+    else if (format == 'p')
+        ft_printf_ptr(va_arg(*args, void *), count);
+    else if (format == 'u')
+        ft_printf_unsigned(va_arg(*args, unsigned int), count);
+    else if (format == 'x')
+        ft_printf_hex_lower(va_arg(*args, unsigned int), count);
+    else if (format == 'X')
+        ft_printf_hex_upper(va_arg(*args, unsigned int), count);
 }
 
-int	ft_printf(const char *format, ...){
+int ft_printf(const char *format, ...)
+{
     va_list args;
     size_t i;
-    int size;
+    t_count count;
 
-    i = 0;
-    size = 0;
-    va_start(args, format);
-    if(!format)
+    if (!format)
         return (-1);
-    while(format[i]){
-        if(format[i] == '%'){
+    i = 0;
+    count.size = 0;
+    count.error = 0;
+    va_start(args, format);
+    while (format[i])
+    {
+        if (format[i] == '%')
+        {
             i++;
-            if(format[i] == '\0')
-                break ;
-            if(format[i] == '%')
-                size += write(1, "%", 1);
+            if (format[i] == '\0')
+                break;
+            if (format[i] == '%'){
+                ssize_t w = write(1, "%", 1);
+                if(w == -1)
+                    count.error = 1;
+                else
+                    count.size += 1;
+            }
             else
-                printf_value(format[i], va_arg(args, void *), &size);
+                printf_value(format[i], &args, &count);
         }
         else{
-            size += write(1, &format[i], 1);
+            if(write(1, &format[i], 1) == -1)
+                count.error = 1;
+            count.size += 1;
         }
         i++;
+        if (count.error)
+            break;
     }
     va_end(args);
-    return size;
+    if (count.error == 1)
+        return (-1);
+    return count.size;
 }

@@ -6,28 +6,21 @@
 /*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:19:17 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/25 15:43:09 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:45:28 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putnbr_hex_upper(unsigned long num, int *size){
+void ft_printf_hex_upper(unsigned int num, t_count *count){
     char c;
-    if(num >= 16){
-        ft_putnbr_hex_upper(num / 16, &*size);
-    }
-    c = "0123456789ABCDEF"[num % 16];
-    write(1, &c, 1);
-    (*size)++;
-}
-
-void ft_printf_hex_upper(void *type, int *size){
-    unsigned long num = (unsigned long)(type);
     if(num == 0){
-        write(1, "0", 1);
-        (*size)++;
+        ft_putchar('0', count);
         return;
     }
-    ft_putnbr_hex_upper(num, &*size);
+    else if(num >= 16){
+        ft_printf_hex_upper(num / 16, count);
+    }
+    c = "0123456789ABCDEF"[num % 16];
+    ft_putchar(c, count);
 }
