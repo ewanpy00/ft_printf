@@ -12,15 +12,23 @@
 
 #include "ft_printf.h"
 
-void ft_printf_hex_upper(unsigned int num, t_count *count){
-    char c;
-    if(num == 0){
-        ft_putchar('0', count);
-        return;
-    }
-    else if(num >= 16){
-        ft_printf_hex_upper(num / 16, count);
-    }
-    c = "0123456789ABCDEF"[num % 16];
-    ft_putchar(c, count);
+void	ft_printf_hex_upper(unsigned int num, t_count *count)
+{
+	char	c;
+
+	if (count->error)
+		return;
+	if (num == 0)
+	{
+		ft_putchar('0', count);
+		return;
+	}
+	else if (num >= 16)
+	{
+		ft_printf_hex_upper(num / 16, count);
+		if (count->error)
+			return;
+	}
+	c = "0123456789ABCDEF"[num % 16];
+	ft_putchar(c, count);
 }

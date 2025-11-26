@@ -12,12 +12,18 @@
 
 #include "ft_printf.h"
 
-void ft_printf_unsigned(unsigned int num, t_count *count){
-    char c;
+void	ft_printf_unsigned(unsigned int num, t_count *count)
+{
+	char	c;
 
-    if(num > 9){
-        ft_printf_unsigned(num / 10, count);
-    }
-    c = (num % 10) + '0';
-    ft_putchar(c, count);
+	if (count->error)
+		return;
+	if (num > 9)
+	{
+		ft_printf_unsigned(num / 10, count);
+		if (count->error)
+			return;
+	}
+	c = (num % 10) + '0';
+	ft_putchar(c, count);
 }

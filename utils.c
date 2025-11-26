@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:38:18 by ipykhtin          #+#    #+#             */
-/*   Updated: 2025/11/26 14:05:46 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:49:19 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,47 @@ int ft_strlen(const char *s)
     return (len);
 }
 
-void ft_putchar(char c, t_count *count)
+void	ft_putchar(char c, t_count *count)
 {
-    ssize_t w = write(1, &c, 1);
-    if (w == -1)
-        count->error = 1;
-    else
-        count->size += 1;
+	ssize_t	w;
+
+	if (count->error)
+		return;
+	w = write(1, &c, 1);
+	if (w == -1)
+		count->error = 1;
+	else
+		count->size += 1;
 }
 
-void ft_putnbr(long num, t_count *count){
-    char c;
+void	ft_putnbr(long num, t_count *count)
+{
+	char	c;
 
-    if(num > 9){
-        ft_putnbr(num / 10, count);
-    }
-    c = (num % 10) + '0';
-    ft_putchar(c, count);
+	if (count->error)
+		return;
+	if (num > 9)
+	{
+		ft_putnbr(num / 10, count);
+		if (count->error)
+			return;
+	}
+	c = (num % 10) + '0';
+	ft_putchar(c, count);
 }
 
-void ft_putstr(char *str, t_count *count){
-    size_t i = 0;
-    if(!str)
-        return;
-    while (str[i])
-    {
-        ft_putchar(str[i], count);
-        i++;
-    }
+void	ft_putstr(char *str, t_count *count)
+{
+	size_t	i;
+
+	if (!str || count->error)
+		return;
+	i = 0;
+	while (str[i] && !count->error)
+	{
+		ft_putchar(str[i], count);
+		i++;
+	}
 }
 
 // void ft_putnbr_unsigned(unsigned long num, int *size){
