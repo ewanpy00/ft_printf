@@ -6,15 +6,15 @@
 /*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 14:09:07 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/26 13:39:28 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:25:37 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printf_str(char *str, t_count *count)
+void ft_printf_str(char *str, t_count *count)
 {
-	ssize_t	check_d;
+	ssize_t check_d;
 
 	if (count->error)
 		return;

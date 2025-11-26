@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_decimal.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:14:11 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/26 14:46:19 by ivan             ###   ########.fr       */
+/*   Updated: 2025/11/26 15:25:37 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printf_decimal(int num, t_count *count)
+void ft_printf_decimal(int num, t_count *count)
 {
-	ssize_t	check_d;
+	int check_d;
 
 	if (count->error)
 		return;
@@ -27,7 +27,7 @@ void	ft_printf_decimal(int num, t_count *count)
 			return;
 		}
 		count->size += 11;
-		return ;
+		return;
 	}
 	if (num < 0)
 	{

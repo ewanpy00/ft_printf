@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:38:18 by ipykhtin          #+#    #+#             */
-/*   Updated: 2025/11/26 14:49:19 by ivan             ###   ########.fr       */
+/*   Updated: 2025/11/26 15:24:58 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int ft_strlen(const char *s)
 {
-    size_t len;
+	size_t len;
 
-    len = 0;
-    while (s[len] != '\0')
-        len++;
-    return (len);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }
 
-void	ft_putchar(char c, t_count *count)
+void ft_putchar(char c, t_count *count)
 {
-	ssize_t	w;
+	ssize_t w;
 
 	if (count->error)
 		return;
@@ -35,9 +35,9 @@ void	ft_putchar(char c, t_count *count)
 		count->size += 1;
 }
 
-void	ft_putnbr(long num, t_count *count)
+void ft_putnbr(long num, t_count *count)
 {
-	char	c;
+	char c;
 
 	if (count->error)
 		return;
@@ -51,9 +51,9 @@ void	ft_putnbr(long num, t_count *count)
 	ft_putchar(c, count);
 }
 
-void	ft_putstr(char *str, t_count *count)
+void ft_putstr(char *str, t_count *count)
 {
-	size_t	i;
+	size_t i;
 
 	if (!str || count->error)
 		return;

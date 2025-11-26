@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+// ...existing code...
 void printf_value(char format, va_list *args, t_count *count)
 {
     if (format == 'd' || format == 'i')
@@ -19,6 +20,54 @@ void printf_value(char format, va_list *args, t_count *count)
     else if (format == 'X')
         ft_printf_hex_upper(va_arg(*args, unsigned int), count);
 }
+// ...existing code...
+
+static int handle_percent(const char *format, size_t *i, va_list *args, t_count *count)
+{
+    int check_d;
+    (*i)++;
+    if (format[*i] == '\0')
+        return 1; /* stop: trailing '%' */
+    if (format[*i] == '%')
+    {
+        check_d = write(1, "%", 1);
+        if (check_d == -1)
+            count->error = 1;
+        else
+            count->size += 1;
+        (*i)++;
+        return 0;
+    }
+    printf_value(format[*i], args, count);
+    (*i)++;
+    return 0;
+}
+
+// ...existing code...
+static int process_next(const char *format, size_t *i, va_list *args, t_count *count)
+{
+    int check_d;
+    if (format[*i] == '%')
+    {
+        if (handle_percent(format, i, args, count))
+            return 1;
+    }
+    else
+    {
+        check_d = write(1, &format[*i], 1);
+        if (check_d == -1)
+        {
+            count->error = 1;
+            return 1;
+        }
+        count->size += 1;
+        (*i)++;
+    }
+    if (count->error)
+        return 1;
+    return 0;
+}
+// ...existing code...
 
 int ft_printf(const char *format, ...)
 {
@@ -33,31 +82,8 @@ int ft_printf(const char *format, ...)
     count.error = 0;
     va_start(args, format);
     while (format[i])
-    {
-        if (format[i] == '%')
-        {
-            i++;
-            if (format[i] == '\0')
-                break;
-            if (format[i] == '%'){
-                ssize_t w = write(1, "%", 1);
-                if(w == -1)
-                    count.error = 1;
-                else
-                    count.size += 1;
-            }
-            else
-                printf_value(format[i], &args, &count);
-        }
-        else{
-            if(write(1, &format[i], 1) == -1)
-                count.error = 1;
-            count.size += 1;
-        }
-        i++;
-        if (count.error)
+        if (process_next(format, &i, &args, &count))
             break;
-    }
     va_end(args);
     if (count.error == 1)
         return (-1);

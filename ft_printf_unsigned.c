@@ -6,15 +6,15 @@
 /*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:14:40 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/26 13:36:28 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:23:33 by ipykhtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printf_unsigned(unsigned int num, t_count *count)
+void ft_printf_unsigned(unsigned int num, t_count *count)
 {
-	char	c;
+	char c;
 
 	if (count->error)
 		return;
