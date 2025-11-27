@@ -1,8 +1,19 @@
-# Compiler and flags
-CC = gcc
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/26 20:45:05 by ivan              #+#    #+#              #
+#    Updated: 2025/11/26 20:47:53 by ivan             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-# Project files
 NAME = libftprintf.a
 SRCS =	ft_printf.c \
 		utils.c \
@@ -15,7 +26,6 @@ SRCS =	ft_printf.c \
 		ft_printf_ptr.c
 OBJS = $(SRCS:.c=.o)
 
-# Rules
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -31,3 +41,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re:	fclean all
+
+.PHONY: all clean fclean re

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:38:18 by ipykhtin          #+#    #+#             */
-/*   Updated: 2025/11/26 15:24:58 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:17:25 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (s[len] != '\0')
@@ -22,12 +22,12 @@ int ft_strlen(const char *s)
 	return (len);
 }
 
-void ft_putchar(char c, t_count *count)
+void	ft_putchar(char c, t_count *count)
 {
-	ssize_t w;
+	ssize_t	w;
 
 	if (count->error)
-		return;
+		return ;
 	w = write(1, &c, 1);
 	if (w == -1)
 		count->error = 1;
@@ -35,28 +35,28 @@ void ft_putchar(char c, t_count *count)
 		count->size += 1;
 }
 
-void ft_putnbr(long num, t_count *count)
+void	ft_putnbr(long num, t_count *count)
 {
-	char c;
+	char	c;
 
 	if (count->error)
-		return;
+		return ;
 	if (num > 9)
 	{
 		ft_putnbr(num / 10, count);
 		if (count->error)
-			return;
+			return ;
 	}
 	c = (num % 10) + '0';
 	ft_putchar(c, count);
 }
 
-void ft_putstr(char *str, t_count *count)
+void	ft_putstr(char *str, t_count *count)
 {
-	size_t i;
+	size_t	i;
 
 	if (!str || count->error)
-		return;
+		return ;
 	i = 0;
 	while (str[i] && !count->error)
 	{

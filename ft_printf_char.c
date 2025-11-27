@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipykhtin <ipykhtin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ivan <ivan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 22:07:29 by ivan              #+#    #+#             */
-/*   Updated: 2025/11/26 15:25:37 by ipykhtin         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:21:28 by ivan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_printf_char(int charecter, t_count *count)
+void	ft_printf_char(int charecter, t_count *count)
 {
 	if (count->error)
-		return;
+		return ;
 	ft_putchar(charecter, count);
 }
